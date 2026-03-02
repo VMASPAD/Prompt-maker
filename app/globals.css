@@ -1,26 +1,256 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography"; 
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Agregamos la fuente Ubuntu si está disponible */
+  --font-sans: "Ubuntu", ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Ubuntu/GNOME suele usar bordes más redondeados y suaves */
+  --radius: 0.5rem;
+
+  /* Light Mode - Base clara neutral/cálida */
+  --background: oklch(0.985 0.002 74);
+  --foreground: oklch(0.25 0.01 300);
+  /* Gris muy oscuro, no negro puro */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.01 300);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.01 300);
+
+  /* UBUNTU ORANGE (#E95420) */
+  --primary: oklch(0.61 0.18 35);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Grises claros del tema Yaru Light */
+  --secondary: oklch(0.94 0.005 300);
+  --secondary-foreground: oklch(0.25 0.01 300);
+  --muted: oklch(0.94 0.005 300);
+  --muted-foreground: oklch(0.5 0.01 300);
+
+  /* Hover states */
+  --accent: oklch(0.94 0.005 300);
+  --accent-foreground: oklch(0.61 0.18 35);
+  /* Texto naranja en hover */
+
+  /* Destructive - Rojo Yaru */
+  --destructive: oklch(0.55 0.18 25);
+  --border: oklch(0.85 0.01 300);
+  --input: oklch(0.85 0.01 300);
+
+  /* Ring Naranja */
+  --ring: oklch(0.61 0.18 35);
+
+  --chart-1: oklch(0.61 0.18 35);
+  /* Naranja */
+  --chart-2: oklch(0.45 0.12 330);
+  /* Aubergine/Púrpura */
+  --chart-3: oklch(0.55 0.12 250);
+  /* Azul GNOME */
+  --chart-4: oklch(0.7 0.15 80);
+  /* Verde cálido */
+  --chart-5: oklch(0.75 0.15 50);
+  /* Amarillo cálido */
+
+  --sidebar: oklch(0.96 0.005 300);
+  --sidebar-foreground: oklch(0.25 0.01 300);
+  --sidebar-primary: oklch(0.61 0.18 35);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.92 0.005 300);
+  --sidebar-accent-foreground: oklch(0.61 0.18 35);
+  --sidebar-border: oklch(0.85 0.01 300);
+  --sidebar-ring: oklch(0.61 0.18 35);
+}
+
+.dark {
+  /* Dark Mode - Inspirado en Yaru Dark (Aubergine muy oscuro) */
+  --background: oklch(0.2 0.02 330);
+  /* Fondo oscuro con sutil tinte púrpura */
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.23 0.02 330);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.23 0.02 330);
+  --popover-foreground: oklch(0.95 0 0);
+
+  /* UBUNTU ORANGE - Ligeramente más brillante en dark mode para contraste */
+  --primary: oklch(0.65 0.18 35);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Grises oscuros Yaru */
+  --secondary: oklch(0.28 0.02 330);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.28 0.02 330);
+  --muted-foreground: oklch(0.65 0.01 330);
+
+  /* Hover states */
+  --accent: oklch(0.28 0.02 330);
+  --accent-foreground: oklch(0.65 0.18 35);
+  /* Naranja en hover */
+
+  --destructive: oklch(0.6 0.18 25);
+  --border: oklch(0.32 0.02 330);
+  --input: oklch(0.32 0.02 330);
+  --ring: oklch(0.65 0.18 35);
+
+  --chart-1: oklch(0.65 0.18 35);
+  /* Naranja */
+  --chart-2: oklch(0.5 0.15 330);
+  /* Púrpura */
+  --chart-3: oklch(0.6 0.15 250);
+  /* Azul */
+  --chart-4: oklch(0.65 0.15 150);
+  /* Verde */
+  --chart-5: oklch(0.7 0.15 80);
+  /* Amarillo/Verde */
+
+  /* El sidebar en modo oscuro suele ser más profundo */
+  --sidebar: oklch(0.18 0.02 330);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.65 0.18 35);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.25 0.02 330);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.28 0.02 330);
+  --sidebar-ring: oklch(0.65 0.18 35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+
+  /* Accordion component helpers using theme CSS variables */
+  .accordion-border {
+    border-color: var(--border);
+  }
+
+  /* Compact / Accent variant */
+  .accordion-compact-trigger {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-radius: var(--radius-sm);
+    transition: background .18s ease, transform .18s ease;
+  }
+
+  .accordion-compact-trigger:hover {
+    filter: brightness(.95);
+  }
+
+  .accordion-compact-icon {
+    transition: transform .2s ease;
+  }
+
+  .accordion-compact-panel {
+    color: var(--muted-foreground);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+
+  /* Horizontal / Sidebar variant */
+  .accordion-side-trigger {
+    background: var(--sidebar);
+    color: var(--sidebar-foreground);
+    transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+
+  .accordion-side-trigger:hover {
+    filter: brightness(.98);
+  }
+
+  .accordion-side-panel {
+    background: var(--card);
+    color: var(--card-foreground);
+    border-radius: var(--radius-md);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+
+  .accordion-sidebar-column {
+    border-right: 1px solid var(--sidebar-border);
+  }
+
+  /* ── RTL global layout utility ──────────────────────────────────────────
+   * Add .rtl to the <html> tag to flip the entire page to right-to-left, or
+   * apply it to any container to scope the direction to that subtree only.
+   * ----------------------------------------------------------------------- */
+  .rtl {
+    direction: rtl;
+    text-align: start;
+  }
+
+  .rtl * {
+    direction: rtl;
+    unicode-bidi: inherit;
+  }
+
+  /* ── Card component helpers ─────────────────────────────────────────────── */
+  .card-default {
+    border-color: var(--border);
+    background-color: var(--card);
+    color: var(--card-foreground);
+  }
+
+  .card-filled {
+    background-color: color-mix(in oklch, var(--primary) 8%, transparent);
+    border-color: color-mix(in oklch, var(--primary) 20%, transparent);
+    color: var(--card-foreground);
+  }
+
+  .badge-base {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-style: solid;
+    font-weight: 500;
+    transition: colors 0.15s ease;
+  }
 }
