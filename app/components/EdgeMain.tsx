@@ -3,10 +3,10 @@ import {
   EdgeLabelRenderer,
   getStraightPath,
   useInternalNode,
-  EdgeProps
+  EdgeProps,
 } from '@xyflow/react';
   
-export default function EdgeMain({ id, source, sourceX, sourceY, target, targetX, targetY, data }: EdgeProps) {
+export default function EdgeMain({ id, source, sourceX, sourceY, target, targetX, targetY, data, markerEnd }: EdgeProps) {
   const [edgePath, labelX, labelY] = getStraightPath({
     sourceX,
     sourceY,
@@ -22,7 +22,12 @@ export default function EdgeMain({ id, source, sourceX, sourceY, target, targetX
  
   return (
     <>
-      <BaseEdge id={id} path={edgePath} style={{ opacity: toBeDeleted ? 0.3 : 1, transition: 'opacity 0.2s' }} />
+      <BaseEdge
+        id={id}
+        path={edgePath}
+        markerEnd={markerEnd}
+        style={{ opacity: toBeDeleted ? 0.3 : 1, transition: 'opacity 0.2s' }}
+      />
       {data?.label && (
         <EdgeLabelRenderer>
           <div

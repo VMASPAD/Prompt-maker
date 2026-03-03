@@ -15,6 +15,7 @@
     "@tiptap/react": "^3.20.0",
     "@tiptap/starter-kit": "^3.20.0",
     "@xyflow/react": "^12.10.1",
+    "driver.js": "^1.4.0",
     "fs": "^0.0.1-security",
     "gnome-ui": "^1.9.1",
     "next": "16.1.6",

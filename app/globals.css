@@ -166,6 +166,168 @@
   }
 }
 
+/* ── ReactFlow handle improvements ─────────────────────────────────────── */
+
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  border-width: 2px !important;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+/* Handles semi-transparent at rest, fully visible on node hover */
+.react-flow__node .react-flow__handle {
+  opacity: 0.4;
+}
+
+.react-flow__node:hover .react-flow__handle,
+.react-flow__node.selected .react-flow__handle {
+  opacity: 1;
+}
+
+/* Glow on hover – no scale/expansion */
+.react-flow__handle.connectionindicator:hover {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px oklch(0.61 0.18 35 / 0.3) !important;
+}
+
+/* Pulse animation when a connection is being dragged */
+.react-flow__handle.connectingfrom,
+.react-flow__handle.connectingto {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  animation: handle-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes handle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.61 0.18 35 / 0.55); }
+  50%       { box-shadow: 0 0 0 7px oklch(0.61 0.18 35 / 0); }
+}
+
+/* ── TipTap code block styling ──────────────────────────────────────────── */
+
+/* Dark pill header showing it's a code block */
+.tiptap pre {
+  position: relative;
+  background: oklch(0.16 0.02 255) !important;
+  border: 1px solid oklch(0.28 0.04 255);
+  border-radius: 0.6rem !important;
+  padding: 2.4rem 1rem 1rem !important;
+  overflow-x: auto;
+  margin: 0.6rem 0;
+}
+
+.tiptap pre::before {
+  content: 'Code';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.7 0.12 255);
+  background: oklch(0.2 0.03 255);
+  border-bottom: 1px solid oklch(0.28 0.04 255);
+  border-radius: 0.6rem 0.6rem 0 0;
+  font-family: inherit;
+}
+
+.tiptap pre code {
+  color: #e2e8f0 !important;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Source Code Pro', monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Inline code (backtick) */
+.tiptap code:not(pre code) {
+  background: oklch(0.92 0.005 255);
+  color: oklch(0.5 0.18 290);
+  padding: 0.1em 0.4em;
+  border-radius: 0.3rem;
+  font-size: 0.875em;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.dark .tiptap code:not(pre code) {
+  background: oklch(0.28 0.04 255);
+  color: oklch(0.78 0.14 290);
+}
+
+/* ── Driver.js custom popover theme ─────────────────────────────────────── */
+
+.driver-popover.prompt-maker-tour {
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: 0 20px 40px oklch(0 0 0 / 0.18);
+  font-family: var(--font-sans, sans-serif);
+  max-width: 340px;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.4rem;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-description b {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-progress-text {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-footer button {
+  border-radius: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--muted);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-next-btn {
+  background: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-color: var(--primary) !important;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-next-btn:hover,
+.driver-popover.prompt-maker-tour .driver-popover-done-btn:hover {
+  filter: brightness(0.92);
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-close-btn {
+  color: var(--muted-foreground);
+  opacity: 0.6;
+}
+
+.driver-popover.prompt-maker-tour .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: var(--card);
+}
+
 @layer components {
 
   /* Accordion component helpers using theme CSS variables */

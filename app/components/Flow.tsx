@@ -24,11 +24,16 @@ import EdgeMain from "./EdgeMain";
 import EdgeNote from "./EdgeNote";
 import { Tooltip } from "gnome-ui/tooltip";
 import { Eraser } from "./Eraser";
+import { useTour } from "./useTour";
+import { MarkerType } from "@xyflow/react";
 export default function Flow() {
   const initialNodes: Node[] = [];
   const initialEdges: EdgeProps[] = [];
   const edgeTypes = {
     EdgeMain: EdgeMain,
+  };
+  const defaultEdgeOptions = {
+    markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14 },
   };
   const [elements, setElements, { undo, canUndo, redo, canRedo }] = useUndoable(
     { nodes: initialNodes as Node[], edges: [] as EdgeProps[] },
@@ -84,6 +89,8 @@ export default function Flow() {
   const [toolMode, setToolMode] = useState<"default" | "lasso" | "eraser">(
     "default",
   );
+
+  useTour(isLoaded);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isWiping, setIsWiping] = useState(false);
   const [clipboard, setClipboard] = useState<Node[]>([]);
@@ -227,6 +234,7 @@ export default function Flow() {
           edges={edges}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
+          defaultEdgeOptions={defaultEdgeOptions}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
@@ -249,6 +257,7 @@ export default function Flow() {
         >
           <Panel
             position="top-center"
+            id="tour-toolbar"
             className="bg-background border border-border rounded-xl shadow-sm flex items-center p-1 gap-1"
           >
             <Tooltip.Provider delay={300}> 
@@ -347,10 +356,10 @@ export default function Flow() {
                 </Tooltip.Root> 
             </Tooltip.Provider>
           </Panel>
-          <Panel position="top-left">
+          <Panel position="top-left" >
             <Menu node={getNewNode} />
           </Panel>
-          <Panel position="bottom-right">
+          <Panel position="bottom-right" id="tour-view-result">
             <ViewResult nodes={nodes} edges={edges} />
           </Panel>
           <Background />

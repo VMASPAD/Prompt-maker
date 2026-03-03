@@ -68,10 +68,27 @@ function ViewResult({ nodes, edges }: { nodes: any[], edges: any[] }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodes, edges])
 
+  const hasContent = nodes && nodes.length > 0;
+
   return (
     <Dialog.Root>
-      <Dialog.Trigger className={`${btnBase} h-9 border border-border bg-card px-4 text-foreground hover:bg-accent`}>
-        <Notebook className="size-4 shrink-0" />   
+      <Dialog.Trigger
+        className={`${btnBase} relative h-10 px-4 shadow-md ${
+          hasContent
+            ? 'bg-primary text-primary-foreground hover:brightness-95'
+            : 'border border-border bg-card text-foreground hover:bg-accent'
+        }`}
+        title="Assemble and view your final AI prompt"
+      >
+        {/* Pulsing dot when there is content ready */}
+        {hasContent && (
+          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground opacity-60" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-primary-foreground opacity-90" />
+          </span>
+        )}
+        <Notebook className="size-4 shrink-0" />
+        <span>View Prompt</span>
       </Dialog.Trigger>
 
       <Dialog.Portal>

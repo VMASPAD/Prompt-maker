@@ -27,10 +27,11 @@ function Menu({node}: MenuProps) {
     node(newNode);
   }
   return (
-    <div className="">
+    <div className="" >
       <Drawer.Root swipeDirection="left">
         <Drawer.Trigger
           className={`${btnBase} absolute z-10 h-9 border border-border bg-card px-4 text-foreground hover:bg-accent`}
+          id="tour-menu"
         >
           <PanelRight className="size-4 shrink-0 scale-x-[-1]" />
         </Drawer.Trigger>
@@ -44,7 +45,7 @@ function Menu({node}: MenuProps) {
                   
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-sidebar-foreground truncate">
-                      Add new card
+                      Add new node
                     </p>
                   </div>
                   <Drawer.Close className="flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-sidebar-accent hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring">
@@ -53,9 +54,7 @@ function Menu({node}: MenuProps) {
                 </div>
 
                 <div className="px-3 pb-1 pt-3">
-                  <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                    Places
-                  </p>
+                   
                 </div>
 
                 <div className="flex flex-col px-2">
